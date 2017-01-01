@@ -22,6 +22,7 @@ class Word:
     status_code = 0
     msg = ""
     cn_definition_list = []
+    en_definition_dict = {}
 
     def __init__(self, input_word):
         self.word = input_word
@@ -43,6 +44,7 @@ class Word:
             else:
                 result_data = result_json['data']
                 cn_definition = result_data['cn_definition']['defn']
+                self.en_definition_dict = result_data['en_definitions']
                 self.cn_definition_list = cn_definition.split('\n')
 
         except Exception as ex:
@@ -54,6 +56,12 @@ class Word:
         if self.status_code != 0:
             print("\t", self.msg)
         else:
+            print("    英文意思：")
+            for k, v in self.en_definition_dict.items():
+                print("\t[{}]".format(k))
+                for each in v:
+                    print("\t    {}".format(each))
+            print("    中文意思：")
             for each in self.cn_definition_list:
                 print("\t", each)
 
