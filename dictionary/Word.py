@@ -4,11 +4,8 @@ from __future__ import unicode_literals
 
 import requests
 import json
-import os
 
-
-URL = "https://api.shanbay.com"
-SEARCH_PATH = "/bdc/search/?word={}"
+from dictionary import config_parse
 
 
 STATUS_CODE_CONSTANT = {
@@ -32,8 +29,17 @@ class Word:
         self.display_result()
 
     def look_for_word(self):
-        url_path = URL + SEARCH_PATH.format(self.word)
-        result_unicode = requests.get(url_path.format(self.word)).text
+        url_path = "{}/{}".format(config_parse.get_value("host", "shanbay_url"),
+                                  config_parse.get_value("path", "shanbay_search_path"))
+        param = {
+            "word": self.word
+        }
+        request_result = requests.get(url_path, param)
+        if request_result.status_code != 200:
+            self.msg = "Fail to connect the api. Status code: {}".format(request_result.status_code)
+            return
+        else:
+            result_unicode = request_result.text
         try:
             result_json = json.loads(result_unicode)
             self.status_code = result_json['status_code']
@@ -64,20 +70,3 @@ class Word:
             print("    中文意思：")
             for each in self.cn_definition_list:
                 print("\t", each)
-
-
-def main():
-    while True:
-        input_word = input("Input Your Word: ")
-        if input_word.strip() == "Exit":
-            print("Thanks, bye ~")
-            break
-        elif input_word.strip() == "Clear":
-            os.system("clear")
-        else:
-            new_word = Word(input_word.strip())
-            new_word.process_word()
-
-
-if __name__ == '__main__':
-    main()
