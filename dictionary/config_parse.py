@@ -3,7 +3,7 @@
 import configparser
 
 config = configparser.ConfigParser(allow_no_value=True)
-config.read('etc/config.ini')
+config.read('../etc/config.ini')
 
 
 def get_value(section, option, default=None):

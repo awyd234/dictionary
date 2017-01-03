@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import os
 
-from dictionary.Word import Word
+from Word import Word
 
 
 def main():

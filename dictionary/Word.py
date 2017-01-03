@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import requests
 import json
 
-from dictionary import config_parse
+import config_parse
 
 
 STATUS_CODE_CONSTANT = {
@@ -31,7 +31,6 @@ class Word:
     def look_for_word(self):
         url_path = "{}/{}".format(config_parse.get_value("host", "shanbay_url"),
                                   config_parse.get_value("path", "shanbay_search_path"))
-        print(config_parse.get_value("host", "shanbay_url"))
         param = {
             "word": self.word
         }
