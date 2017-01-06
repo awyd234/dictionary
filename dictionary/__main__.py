@@ -12,7 +12,6 @@ def main():
         input_word = input("Input Your Word: ")
         if input_word.strip() == "Exit":
             print("Thanks, bye ~")
-            break
         elif input_word.strip() == "Clear":
             os.system("clear")
         else:

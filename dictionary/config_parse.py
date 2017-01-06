@@ -12,6 +12,13 @@ config.read(config_path)
 
 
 def get_value(section, option, default=None):
+    '''
+    得到etc/config.ini里的值
+    :param section: 内容模块
+    :param option: 模块的键值
+    :param default: 查找失败返回值
+    :return:
+    '''
     try:
         return format(config.get(section, option))
     except:
