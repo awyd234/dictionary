@@ -10,10 +10,10 @@ from Word import Word
 def main():
     while True:
         input_word = input("Input Your Word: ")
-        if input_word.strip() == "Exit":
+        if input_word.strip() == "exit()":
             print("Thanks, bye ~")
             break
-        elif input_word.strip() == "Clear":
+        elif input_word.strip() == "clear()":
             os.system("clear")
         else:
             new_word = Word(input_word.strip())
